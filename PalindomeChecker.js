@@ -7,16 +7,16 @@ function palindrome(str) {
     // Clean non alphanumeric characters of the string and covert it to lower case
     const cleanedString = str.replace(/[\W_]/g, '').toLowerCase();
     // Check each letter of the string
-    const checkArray = cleanedString.split('').map((letter, pos, arr) => {
-        if (letter === arr[arr.length-pos-1]) {
-            return true;
+    const checkArray = cleanedString.split('').reduce((accum, letter, pos, arr, len=arr.length-pos-1) => {
+        if (letter === arr[len]) {
+            return accum && true;
         } else {
-            return false;
+            return accum && false;
         }
-    })
+    }, true)
     // return true if the whole string is a palindrome
-    return checkArray.every(val => val);
+    return checkArray;
 }
 
 ;
-console.log(palindrome(' eye, ..#'));
+console.log(palindrome('A man, a plan, a canal. Panama'));
