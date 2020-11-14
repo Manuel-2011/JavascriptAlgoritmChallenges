@@ -25,16 +25,17 @@ function convertToRoman(num) {
             // Check if the remainder of the number is just 1 10base number less than the next 10base number
             if (base10 && romanValues[i]*times == romanValues[i+1] - romanValues[i]) {
                 romanNumeral = romanNumeral+romanSymbols[romanValues[i]]+romanSymbols[romanValues[i+1]];
-            } else if (base10 === false && romanValues[i]*(num/romanValues[i]) == romanValues[i+1] - romanValues[i-1]) {
+                num -= romanValues[i]*times;
+            } else if (base10 === false && romanValues[i]*(num/romanValues[i]) >= romanValues[i+1] - romanValues[i-1]) {
                 romanNumeral = romanNumeral+romanSymbols[romanValues[i-1]]+romanSymbols[romanValues[i+1]];
-                times = num/romanValues[i];
+                num = num - (romanValues[i+1] - romanValues[i-1]);
             // If not just append the symbol the require number of times
             } else {
                 for (let j=1; j <= times; j++) {
                     romanNumeral += romanSymbols[romanValues[i]];
                 }
+                num -= romanValues[i]*times;
             }
-            num -= romanValues[i]*times;
         }
     }
     
