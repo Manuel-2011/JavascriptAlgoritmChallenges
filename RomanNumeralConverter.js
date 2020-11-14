@@ -26,6 +26,7 @@ function convertToRoman(num) {
             if (base10 && romanValues[i]*times == romanValues[i+1] - romanValues[i]) {
                 romanNumeral = romanNumeral+romanSymbols[romanValues[i]]+romanSymbols[romanValues[i+1]];
                 num -= romanValues[i]*times;
+            // Check if the remainder of the number is just 1 10base number less than the next NOT-10base number
             } else if (base10 === false && romanValues[i]*(num/romanValues[i]) >= romanValues[i+1] - romanValues[i-1]) {
                 romanNumeral = romanNumeral+romanSymbols[romanValues[i-1]]+romanSymbols[romanValues[i+1]];
                 num = num - (romanValues[i+1] - romanValues[i-1]);
